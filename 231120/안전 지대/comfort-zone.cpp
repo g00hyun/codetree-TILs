@@ -112,7 +112,7 @@ int main() {
         for(int j = 0; j < m; j++)
             cin >> initArr[i][j];
 
-    p = make_pair(0,0);
+    p = make_pair(1,0);
     fillWater();
     cout << p.first << ' ' << p.second << endl;
 

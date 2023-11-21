@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include <queue>
 #include <algorithm>
 
@@ -7,7 +6,6 @@ using namespace std;
 
 int n, m;
 int arr[100][100];
-bool isPass;
 queue<pair<int,int>> q;
 
 int dx[4] = {1,-1,0,0};
@@ -33,13 +31,14 @@ bool Avaliable(int x, int y) {
 }
 
 bool BFS() {
+    bool isPass = false;
     while(!q.empty()) {
         int x = q.front().first;
         int y = q.front().second;
         q.pop();
 
         if(Avaliable(x,y)) {
-            return true;
+            isPass = true;
         }
 
         for(int dir = 0; dir < 4; dir++) {
@@ -49,18 +48,19 @@ bool BFS() {
                 Push(nx,ny);
         }
     }
-    return false;
+    return isPass;
 }
 
 int main() {
     // 여기에 코드를 작성해주세요.
     cin >> n >> m;
     for(int i = 0; i<n; i++)
-        for(int j = 0; j<n; j++)
+        for(int j = 0; j<m; j++)
             cin >> arr[i][j];
 
     Push(0,0);
     if (BFS()) cout << 1;
     else cout << 0;
+    
     return 0;
 }

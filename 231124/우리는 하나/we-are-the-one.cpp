@@ -8,6 +8,7 @@ int n,k,u,d;
 int arr[8][8];
 int visited[8][8];
 queue<pair<int,int>> q;
+vector<pair<int,int>> cities;
 int result = 0;
 
 int dx[4] = {1,-1,0,0};
@@ -73,23 +74,28 @@ int VisitCount() {
                 cnt++;
     return cnt;
 }
-
 void Backtracking(int city) {
     if(city == k) {
+        // cout << "cities.size = " << cities.size() << endl;
+        for(int i = 0; i < cities.size(); i++) {
+            int x = cities[i].first;
+            int y = cities[i].second;
+            Push(x,y);
+        }
+
         BFS();
         // Print();
-        // cout << "!" << endl;
-        // cout << VisitCount() << endl;
         result = max(result, VisitCount());
+        VisitClear();
         return;
     }
 
     for(int i = 0; i<n; i++)
         for(int j = 0; j<n; j++) {
-            Push(i,j);
+            cities.push_back(make_pair(i,j));
+            // cout << "Push (" << i << "," << j << ")" << endl;
             Backtracking(city + 1);
-            // Pop(i,j);
-            VisitClear();
+            cities.pop_back();
         }
 }
 

@@ -52,6 +52,19 @@ void BFS() {
     }
 }
 
+int Extract() {
+    int value = INT_MAX;
+
+    for(int a = 0; a<n; a++) {
+        for(int b = 0; b<n; b++) {
+            if(arr[a][b] == 3 && step[a][b] != -1)
+                value = min(value, step[a][b]);
+        }
+    }
+
+    return value;
+}
+
 int main() {
     // 여기에 코드를 작성해주세요.
     cin >> n >> h >> m;
@@ -64,7 +77,7 @@ int main() {
     // for(int i = 0; i<n; i++)
     //     memset(result[i], -1, sizeof(int)*n);
 
-    // Push(1,3,0);
+    // Push(0,4,0);
     // BFS();
 
     for(int i = 0; i<n; i++) {
@@ -75,19 +88,17 @@ int main() {
                 Push(i,j,0);
                 BFS();
 
-                result[i][j] = INT_MAX;
-                for(int a = 0; a<n; a++) {
-                    for(int b = 0; b<n; b++) {
-                        if(arr[a][b] == 3)
-                            result[i][j] = min(result[i][j], step[a][b]);
-                    }
-                }
+                int extractValue = Extract();
+
+                if(extractValue == INT_MAX) result[i][j] = -1;
+                else result[i][j] = extractValue;
             }
         }
     }
 
     for(int i = 0; i<n; i++) {
         for(int j = 0; j<n; j++)
+            // if(arr[i][j] == 3)
             cout << result[i][j] << ' ';
         cout << endl;
     }

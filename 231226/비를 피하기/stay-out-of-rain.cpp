@@ -1,3 +1,5 @@
+// 3을 출발로 하는 BFS 구해서 계산하면 훨씬 쉬움
+
 #include <iostream>
 #include <queue>
 #include <algorithm>
@@ -72,14 +74,6 @@ int main() {
         for(int j = 0; j<n; j++)
             cin >> arr[i][j];
 
-    // InitStep();
-
-    // for(int i = 0; i<n; i++)
-    //     memset(result[i], -1, sizeof(int)*n);
-
-    // Push(0,4,0);
-    // BFS();
-
     for(int i = 0; i<n; i++) {
         for(int j = 0; j<n; j++) {
             if(arr[i][j] == 2) {
@@ -98,7 +92,6 @@ int main() {
 
     for(int i = 0; i<n; i++) {
         for(int j = 0; j<n; j++)
-            // if(arr[i][j] == 3)
             cout << result[i][j] << ' ';
         cout << endl;
     }

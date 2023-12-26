@@ -2,6 +2,7 @@
 #include <queue>
 #include <algorithm>
 #include <string.h>
+#include <climits>
 
 using namespace std;
 
@@ -63,6 +64,9 @@ int main() {
     // for(int i = 0; i<n; i++)
     //     memset(result[i], -1, sizeof(int)*n);
 
+    // Push(1,3,0);
+    // BFS();
+
     for(int i = 0; i<n; i++) {
         for(int j = 0; j<n; j++) {
             if(arr[i][j] == 2) {
@@ -71,16 +75,13 @@ int main() {
                 Push(i,j,0);
                 BFS();
 
-                int insert = n*n;
+                result[i][j] = INT_MAX;
                 for(int a = 0; a<n; a++) {
                     for(int b = 0; b<n; b++) {
                         if(arr[a][b] == 3)
-                            insert = min(insert, step[a][b]);
+                            result[i][j] = min(result[i][j], step[a][b]);
                     }
                 }
-                
-                if(insert != n*n) result[i][j] = insert;
-                else result[i][j] = -1;
             }
         }
     }

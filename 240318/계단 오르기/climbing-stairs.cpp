@@ -14,7 +14,7 @@ int main() {
     dp[3] = 1;
     dp[4] = 1;
     for(int i = 5; i<=n; i++) {
-        dp[i] = (max(dp[i-2], dp[i-3]) + 1) % 10007;
+        dp[i] = (dp[i-2] + dp[i-3]) % 10007;
     }
 
     cout << dp[n];

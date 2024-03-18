@@ -3,7 +3,7 @@
 using namespace std;
 
 int n;
-int dp[1001];
+long long dp[1001];
 
 int main() {
     // 여기에 코드를 작성해주세요.

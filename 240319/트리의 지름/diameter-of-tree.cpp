@@ -35,20 +35,23 @@ int main() {
         v[n2].push_back(make_pair(n1, val));
     }
 
-    visited[1] = true;
-    DFS(1);
+    fill(visited, visited+n+1, false);
+    fill(nodeVal, nodeVal+n+1, 0);
+
+    visited[5] = true;
+    DFS(5);
 
     int selectNode;
+    int val = -1;
     for(int i = 1; i<=n; i++) {
-        int val = -1;
         if(val < nodeVal[i]) {
             val = nodeVal[i];
             selectNode = i;
         }   
     }
     
-    fill(visited, visited+n, false);
-    fill(nodeVal, nodeVal+n, 0);
+    fill(visited, visited+n+1, false);
+    fill(nodeVal, nodeVal+n+1, 0);
 
     visited[selectNode] = true;
     DFS(selectNode);

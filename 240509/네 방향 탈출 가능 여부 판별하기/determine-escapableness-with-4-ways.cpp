@@ -51,10 +51,7 @@ int main() {
     visited[0][0] = true;
     BFS();
 
-    if(visited[n-1][m-1])
-        cout << 1;
-    else
-        cout << 0;
+    cout << visited[n-1][m-1];
         
 
     return 0;

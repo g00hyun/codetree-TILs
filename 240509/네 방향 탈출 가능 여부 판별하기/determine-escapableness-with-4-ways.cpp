@@ -14,9 +14,10 @@ bool inRange(int x, int y) {
 }
 
 bool Cango(int x, int y) {
-    if(!inRange(x,y)) return false;
-    if(visited[x][y] || arr[x][y] == 0) return false;
-    return true;
+    // if(!inRange(x,y)) return false;
+    // if(visited[x][y] || arr[x][y] == 0) return false;
+    // return true;
+    return inRange(x, y) && arr[x][y] && !visited[x][y];
 }
 
 void BFS() {

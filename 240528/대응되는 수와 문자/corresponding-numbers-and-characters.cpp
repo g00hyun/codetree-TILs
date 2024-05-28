@@ -28,9 +28,7 @@ int main() {
         cin >> tmp;
 
         if(isNumber(tmp)) {
-            for(int i = 1; i<=n; i++)
-                if(stoi(tmp) == un_m[sarr[i]])
-                    cout << sarr[i] << endl;
+            cout << sarr[stoi(tmp)] << endl;
         }
         else
             cout << un_m[tmp] << endl;

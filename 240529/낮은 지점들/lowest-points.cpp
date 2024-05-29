@@ -20,7 +20,7 @@ int main() {
             un_m[x] = min(un_m[x], y);
     }
 
-    int result = 0;
+    long long result = 0;
     for(auto it = un_m.begin(); it != un_m.end(); it++) {
         result += it->second;
     }

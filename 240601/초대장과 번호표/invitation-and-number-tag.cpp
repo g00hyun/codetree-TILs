@@ -31,7 +31,7 @@ int main() {
 
             group[i].push_back(tmp);
         }
-        // sort(group[i].begin(), group[i].end());
+        sort(group[i].begin(), group[i].end());
     }
 
     sort(group, group + g, cmp);
@@ -47,6 +47,8 @@ int main() {
     for(int i = 0; i<g; i++) {
         int size = group[i].size();
 
+        vector<int> tmp = group[i];
+
         for(int j = 0; j<group[i].size(); j++) {
             if(result.find(group[i][j]) != result.end()) {
                 size--;
@@ -58,10 +60,35 @@ int main() {
             for(int j = 0; j<group[i].size(); j++)
                 if(group[i][j] != 0)
                     result.insert(group[i][j]);
+            group[i].clear();
+        }
+        else
+            group[i] = tmp;
+    }
+
+    for(int i = 0; i<g; i++) {
+        int size = group[i].size();
+        if(size == 0) continue;
+
+        for(int j = 0; j<group[i].size(); j++) {
+            if(result.find(group[i][j]) != result.end()) {
+                size--;
+                group[i][j] = 0;
+            }
+        }
+
+        if(size == 1) {
+            for(int j = 0; j<group[i].size(); j++)
+                if(group[i][j] != 0)
+                    result.insert(group[i][j]);
+            group[i].clear();
         }
     }
 
     cout << result.size();
+    // cout << endl;
+    // for(auto a : result)
+    //     cout << a << ' ';
 
     return 0;
 }

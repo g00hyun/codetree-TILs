@@ -44,44 +44,32 @@ int main() {
     //     cout << endl;
     // }
 
-    for(int i = 0; i<g; i++) {
-        int size = group[i].size();
+    bool isBreak = false;
+    while(!isBreak) {
+        isBreak = true;
 
-        vector<int> tmp = group[i];
+        for(int i = 0; i<g; i++) {
+            int size = group[i].size();
+            if(size == 0) continue;
 
-        for(int j = 0; j<group[i].size(); j++) {
-            if(result.find(group[i][j]) != result.end()) {
-                size--;
-                group[i][j] = 0;
+            vector<int> tmp = group[i];
+
+            for(int j = 0; j<group[i].size(); j++) {
+                if(result.find(group[i][j]) != result.end()) {
+                    size--;
+                    group[i][j] = 0;
+                }
             }
-        }
 
-        if(size == 1) {
-            for(int j = 0; j<group[i].size(); j++)
-                if(group[i][j] != 0)
-                    result.insert(group[i][j]);
-            group[i].clear();
-        }
-        else
-            group[i] = tmp;
-    }
-
-    for(int i = 0; i<g; i++) {
-        int size = group[i].size();
-        if(size == 0) continue;
-
-        for(int j = 0; j<group[i].size(); j++) {
-            if(result.find(group[i][j]) != result.end()) {
-                size--;
-                group[i][j] = 0;
+            if(size == 1) {
+                for(int j = 0; j<group[i].size(); j++)
+                    if(group[i][j] != 0)
+                        result.insert(group[i][j]);
+                group[i].clear();
+                isBreak = false;
             }
-        }
-
-        if(size == 1) {
-            for(int j = 0; j<group[i].size(); j++)
-                if(group[i][j] != 0)
-                    result.insert(group[i][j]);
-            group[i].clear();
+            else
+                group[i] = tmp;
         }
     }
 

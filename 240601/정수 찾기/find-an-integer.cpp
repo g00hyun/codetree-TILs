@@ -21,7 +21,8 @@ int main() {
         cin >> arr[i];
 
     for(int i = 0; i<m; i++)
-        s.find(arr[i]) != s.end() ? cout << 1 << endl : cout << 0 << endl;
+        cout << (int)(s.find(arr[i]) != s.end()) << endl;
+        // s.find(arr[i]) != s.end() ? cout << 1 << endl : cout << 0 << endl;
 
     return 0;
 }

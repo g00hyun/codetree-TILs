@@ -16,11 +16,11 @@ int main() {
 
         s.insert(tmp);
     }
-
-    auto it = s.rbegin();
     
     while(k--) {
-        cout << *it-- << ' ';
+        int m = *s.rbegin();
+        s.erase(m);
+        cout << m << ' ';
     }
     return 0;
 }

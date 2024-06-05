@@ -16,18 +16,22 @@ int main() {
     int sum = 0;
     int result = INT_MAX;
     int j = 0;
+
     for(int i = 0; i<n; i++) {
         while(j < n && sum+arr[j] < s) {
             sum += arr[j];
             j++;
         }
-        // cout << j << ' ';
 
-        result = min(result, j - i + 1);
+        if(sum + arr[j] >= s)
+            result = min(result, j - i + 1);
 
         sum -= arr[i];
     }
 
-    cout << result;
+    if(result != INT_MAX)
+        cout << result;
+    else
+        cout << -1;
     return 0;
 }

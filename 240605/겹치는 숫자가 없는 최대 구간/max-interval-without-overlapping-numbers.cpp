@@ -5,7 +5,7 @@ using namespace std;
 
 int n;
 int arr[100000];
-bool visited[100000];
+bool visited[100001];
 
 int main() {
     // 여기에 코드를 작성해주세요.

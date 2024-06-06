@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -11,6 +12,8 @@ int main() {
     for(int i = 0; i<n; i++)
         cin >> arr[i];
 
+    sort(arr, arr+n);
+
     // 중간으로 투포인터 모음
     int i, j;
 
@@ -18,7 +21,7 @@ int main() {
 
     int cnt = 0;
     while(i < j) {
-        while(j >= 0 && arr[i] + arr[j] > m) {
+        while(j > i && arr[i] + arr[j] > m) {
             j--;
         }
 

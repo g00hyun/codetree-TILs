@@ -18,7 +18,7 @@ int main() {
     int j = n-1;
     int result = INT_MAX;
     for(int i = 0; i<n; i++) {
-        while(j >= 0 && result >= abs(arr[j] + arr[i])) {
+        while(i < j && j >= 0 && result >= abs(arr[j] + arr[i])) {
             result = min(result, abs(arr[j] + arr[i]));
             j--;
         }

@@ -22,7 +22,8 @@ int main() {
             j--;
         }
 
-        result = min(result, abs(arr[i] + arr[j]));
+        if(i != j)
+            result = min(result, abs(arr[i] + arr[j]));
     }
 
     cout << result;

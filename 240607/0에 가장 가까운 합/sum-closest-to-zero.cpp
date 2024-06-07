@@ -21,6 +21,8 @@ int main() {
             result = min(result, abs(arr[i] + arr[j]));
             j--;
         }
+
+        result = min(result, abs(arr[i] + arr[j]));
     }
 
     cout << result;

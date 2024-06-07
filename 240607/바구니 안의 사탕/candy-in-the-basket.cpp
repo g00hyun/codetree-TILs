@@ -22,17 +22,18 @@ int main() {
     int tmp = 0;
     for(auto it = m.begin(); it != m.end(); it++) {
         while(it2 != m.end() && it2->first - it->first <= 2*k) {
+            tmp += it2->second;
             it2++;
         }
 
-        it2--;
+        // int sum = 0;
+        // for(auto tmp = it; tmp != it2; tmp++)
+        //     sum += tmp->second;
+        // sum += it2->second;
 
-        int sum = 0;
-        for(auto tmp = it; tmp != it2; tmp++)
-            sum += tmp->second;
-        sum += it2->second;
+        result = max(result, tmp);
 
-        result = max(result, sum);
+        tmp -= it->second;
     }
 
     // cout << endl;

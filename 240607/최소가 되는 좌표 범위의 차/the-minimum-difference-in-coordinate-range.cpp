@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
 #include <algorithm>
+#include <climits>
 
 using namespace std;
 
@@ -18,16 +19,25 @@ int main() {
     }
 
     auto it2 = m.begin();
-    int x_diff = (++it2)->first - (--it2)->first;
-    
+    int x_diff = INT_MAX;
+    bool y_diff = true;
+
     for(auto it = m.begin(); it != m.end(); it++) {
-        while(it2 != m.end() && abs(it->second - it2->second) < d) {
-            if(it != it2)
-                x_diff = min(x_diff, it2->first - it->first);
+        
+        while(it2 != m.end()) {
+            if(abs(it2->second - it->second) >= d) {
+                x_diff = min(x_diff, abs(it2->first - it->first));
+                break;
+            }
+
             it2++;
         }
+        
     }
 
-    cout << x_diff;
+    if(x_diff != INT_MAX)
+        cout << x_diff;
+    else
+        cout << -1;
     return 0;
 }

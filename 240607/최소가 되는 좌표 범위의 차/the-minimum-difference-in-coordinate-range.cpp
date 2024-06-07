@@ -23,27 +23,28 @@ int main() {
 
     int j = 0;
     int x_diff = INT_MAX;
-
-    // int localMin, localMax;
-    // localMin = localMax = v[0].second;
-    set<int> s;
+    
+    set<pair<int,int>> s;
     
     for(int i = 0; i<n; i++) {
         
         while(j < n) {
-            s.insert(v[j].second);
+            s.insert(make_pair(v[j].second, v[j].first));
             
-            if(*s.rbegin() - *s.begin() >= d) {
-                x_diff = min(x_diff, abs(v[j].first - v[i].first));
+            if(s.rbegin()->first - s.begin()->first >= d) {
+                x_diff = min(x_diff, v[j].first - v[i].first);
                 break;
             }
 
             j++;
         }
 
-        s.erase(v[i].second);
+        s.erase(make_pair(v[i].second, v[i].first));
         
     }
+
+    // for(auto tmp : s)
+    //     cout << tmp.first << ' ' << tmp.second << endl;
 
     if(x_diff != INT_MAX)
         cout << x_diff;

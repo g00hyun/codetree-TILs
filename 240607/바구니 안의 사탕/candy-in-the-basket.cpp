@@ -26,17 +26,11 @@ int main() {
             it2++;
         }
 
-        // int sum = 0;
-        // for(auto tmp = it; tmp != it2; tmp++)
-        //     sum += tmp->second;
-        // sum += it2->second;
-
         result = max(result, tmp);
 
         tmp -= it->second;
     }
-
-    // cout << endl;
+    
     cout << result;
 
     return 0;

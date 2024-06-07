@@ -1,6 +1,5 @@
 #include <iostream>
 #include <algorithm>
-#include <climits>
 
 using namespace std;
 
@@ -12,14 +11,14 @@ int main() {
     cin >> n;
     for(int i = 0; i<n; i++)
         cin >> arr[i];
-
+    
     sort(arr, arr+n);
-
+    
     int j = n-1;
-    int result = INT_MAX;
+    int result = abs(arr[0] + arr[n-1]);
     for(int i = 0; i<n; i++) {
-        while(i < j && j >= 0 && result >= abs(arr[j] + arr[i])) {
-            result = min(result, abs(arr[j] + arr[i]));
+        while(i < j && arr[i] + arr[j] >= 0) {
+            result = min(result, abs(arr[i] + arr[j]));
             j--;
         }
     }

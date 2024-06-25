@@ -2,7 +2,7 @@ const fs = require('fs');
 let [year, month, date] = fs.readFileSync(0).toString().trim().split(' ').map(Number);
 
 function isLeap(year) {
-    if(year % 4 == 0) return true;
+    if(year % 4 == 0 && year % 100 != 0) return true;
 
     if(year % 4 == 0 && year % 100 == 0) return false;
 

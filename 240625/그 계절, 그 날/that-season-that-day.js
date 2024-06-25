@@ -23,7 +23,7 @@ function isExistDate(year, month, date) {
                     return true;
             }
             else {
-                if(1<= date && date <= 30)
+                if(1<= date && date <= 28)
                     return true;
             }
             break;

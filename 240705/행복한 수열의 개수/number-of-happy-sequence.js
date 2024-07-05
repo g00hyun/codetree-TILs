@@ -7,39 +7,27 @@ const grid_reflect = [...zip(grid)];
 
 let cnt = 0;
 
-grid.forEach(val => {
-    let j = 0;
-
-    for(let i = 0; i < n; i++) {
-        while(j < n && val[i] === val[j]) {
-            j++;
-        }
-
-        if(j - i >= m) {
-            cnt++;
-            break;
-        } 
-    }
-})
-
-grid_reflect.forEach(val => {
-    let j = 0;
-
-    for(let i = 0; i < n; i++) {
-        while(j < n && val[i] === val[j]) {
-            j++;
-        }
-
-        if(j - i >= m) {
-            cnt++;
-            break;
-        }
-    }
-})
+grid.forEach(val => happySeq(val));
+grid_reflect.forEach(val => happySeq(val));
 
 console.log(cnt)
 
 
 function* zip(grid) {
     for (let i = 0; i < n; i++) yield grid.map(val => val[i])
+}
+
+function happySeq(val) {
+    let j = 0;
+
+    for(let i = 0; i < n; i++) {
+        while(j < n && val[i] === val[j]) {
+            j++;
+        }
+
+        if(j - i >= m) {
+            cnt++;
+            break;
+        }
+    }
 }

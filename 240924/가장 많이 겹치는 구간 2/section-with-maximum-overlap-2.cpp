@@ -1,11 +1,13 @@
 #include <iostream>
 #include <algorithm>
 #include <climits>
+#include <map>
 using namespace std;
 
 int n;
 int arr[100000001];
 int endIdx = INT_MIN;
+map<int, int> m;
 
 int main() {
     // 여기에 코드를 작성해주세요.
@@ -14,14 +16,14 @@ int main() {
         int a,b;
         cin >> a >> b;
 
-        arr[a]++, arr[b]--;
+        m[a]++, m[b]--;
         endIdx = max(endIdx, b);
     }
 
     int count = 0;
     int result = 0;
-    for(int i = 1; i<=endIdx; i++) {
-        count += arr[i];
+    for(auto i : m) {
+        count += i.second;
         result = max(result, count);
     }
 

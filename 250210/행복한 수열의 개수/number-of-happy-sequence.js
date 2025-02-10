@@ -5,18 +5,14 @@ const [n,m] = input[0].split(' ').map(Number)
 const arr = input.slice(1).map(v => v.split(' ').map(Number))
 
 function isHappySeq(seq) {
-    for(let i = 0; i<n; i++) {
-        const target = seq[i];
-        let streak = 1;
+    let streak = 1, maxStreak = 1;
+    for(let i = 1; i<n; i++) {
+        if(seq[i-1] === seq[i]) streak++;
+        else streak = 1;
 
-        for(let j = i + 1; j<n; j++) {
-            if(target === seq[j]) streak++;
-            else break;
-        }
-        
-        if(streak >= m) return true;
+        maxStreak = Math.max(maxStreak, streak);
     }
-    return false;
+    return maxStreak >= m;
 }
 
 let answer = 0;

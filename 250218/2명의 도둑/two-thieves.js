@@ -34,22 +34,28 @@ const CanStole = () => {
 }
 
 const Thievery = () => {
-    // 반례 존재
-    const t1 = arr[theives[0][0]].slice(theives[0][1], theives[0][1] + m).sort((a,b) => b - a)
-    const t2 = arr[theives[1][0]].slice(theives[1][1], theives[1][1] + m).sort((a,b) => b - a)
+    const t1 = arr[theives[0][0]].slice(theives[0][1], theives[0][1] + m)
+    const t2 = arr[theives[1][0]].slice(theives[1][1], theives[1][1] + m)
 
-    let sum = 0
+    return maximizeSumOfSquares(t1) + maximizeSumOfSquares(t2)
+}
 
-    t1.reduce((total, curr) => {
-        if (total - curr >= 0) sum += curr * curr
-        return total - curr
-    }, c)
-    t2.reduce((total, curr) => {
-        if (total - curr >= 0) sum += curr * curr
-        return total - curr
-    }, c)
+// DP
+function maximizeSumOfSquares(arr) {
+    const n = arr.length;
+    const dp = new Array(n + 1).fill(null).map(() => new Array(c + 1).fill(0));
 
-    return sum
+    for (let i = 1; i <= n; i++) {
+        const value = arr[i - 1];
+        const profit = value * value;
+        for (let cap = 0; cap <= c; cap++) {
+            if (value > cap)
+                dp[i][cap] = dp[i - 1][cap];
+            else
+                dp[i][cap] = Math.max(dp[i - 1][cap], dp[i - 1][cap - value] + profit);
+        }
+    }
+    return dp[n][c];
 }
 
 const Backtracking = () => {

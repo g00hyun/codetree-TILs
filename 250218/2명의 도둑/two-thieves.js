@@ -26,8 +26,8 @@ const CanStole = () => {
             return false;
 
     if(theif1[0] === theif2[0]) {
-        if(theif1[1] + m - 1 > theif2[1]) return false
-        if(theif2[1] + m - 1 > theif1[1]) return false
+        if(theif1[1] + m > theif2[1]) return false
+        // if(theif2[1] + m > theif1[1]) return false
     }
 
     return true;
@@ -61,6 +61,7 @@ function maximizeSumOfSquares(arr) {
 const Backtracking = () => {
     if(theives.length === 2) {
         if(CanStole())
+            // console.log(theives)
             result = Math.max(result, Thievery())
         return
     }

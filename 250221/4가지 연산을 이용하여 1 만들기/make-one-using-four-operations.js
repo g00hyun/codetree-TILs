@@ -58,23 +58,33 @@ const canMethod = {
 }
 
 const q = new Queue()
+const step = Array(n+2).fill(-1)
+
+const CanGo = (number) => {
+    if(step[number] !== -1) return false;
+    if(number > n+1) return false;
+    return true
+}
 
 const BFS = () => {
     while(!q.empty()) {
-        const [number, cnt] = q.pop()
-
-        if(number === 1) return cnt
+        const number = q.pop()
 
         for(let i = 0; i<4; i++) {
-            if(canMethod[i](number))
-                q.push([method[i](number), cnt + 1])
+            if(canMethod[i](number)) {
+                const nnumber = method[i](number)
+
+                if(CanGo(nnumber)) {
+                    q.push(nnumber)
+                    step[nnumber] = step[number] + 1
+                }
+            }
         }
     }
-
-    return -1
 }
 
-q.push([n, 0])
-const result = BFS()
+q.push(n)
+step[n] = 0
+BFS()
 
-console.log(result)
+console.log(step[1])

@@ -58,11 +58,11 @@ const canMethod = {
 }
 
 const q = new Queue()
-const step = Array(n+2).fill(-1)
+const step = Array(n).fill(-1)
 
 const CanGo = (number) => {
     if(step[number] !== -1) return false;
-    if(number > n+1) return false;
+    if(number >= n) return false;
     return true
 }
 

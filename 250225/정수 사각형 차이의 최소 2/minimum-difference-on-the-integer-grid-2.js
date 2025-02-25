@@ -49,7 +49,7 @@ for(let i = 1; i<n; i++)
 
         const curr1 = [curr1_0, curr1_1, curr1_2]
 
-        dp[i][j] = curr1_2 > curr0_2 ? curr0 : curr1
+        dp[i][j] = curr1_2 >= curr0_2 ? curr0 : curr1
     }
 
-console.log(dp[n-1][n-1][2])
+console.log(dp)

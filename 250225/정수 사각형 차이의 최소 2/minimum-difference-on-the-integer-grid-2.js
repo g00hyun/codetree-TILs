@@ -52,4 +52,4 @@ for(let i = 1; i<n; i++)
         dp[i][j] = curr1_2 >= curr0_2 ? curr0 : curr1
     }
 
-console.log(dp)
+console.log(dp[n-1][n-1][2])

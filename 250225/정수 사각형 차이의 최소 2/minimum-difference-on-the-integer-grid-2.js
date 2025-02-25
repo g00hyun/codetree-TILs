@@ -52,4 +52,29 @@ for(let i = 1; i<n; i++)
         dp[i][j] = curr1_2 >= curr0_2 ? curr0 : curr1
     }
 
-console.log(dp[n-1][n-1][2])
+const result1 = dp[n-1][n-1][2]
+
+for(let i = 1; i<n; i++)
+    for(let j = 1; j<n; j++) {
+        const prev0 = dp[i-1][j]
+        const prev1 = dp[i][j-1]
+        const target = arr[i][j]
+
+        const curr0_0 = Math.min(prev0[0], target)
+        const curr0_1 = Math.max(prev0[1], target)
+        const curr0_2 = curr0_1 - curr0_0
+
+        const curr0 = [curr0_0, curr0_1, curr0_2]
+
+        const curr1_0 = Math.min(prev1[0], target)
+        const curr1_1 = Math.max(prev1[1], target)
+        const curr1_2 = curr1_1 - curr1_0
+
+        const curr1 = [curr1_0, curr1_1, curr1_2]
+
+        dp[i][j] = curr1_2 > curr0_2 ? curr0 : curr1
+    }
+
+const result2 = dp[n-1][n-1][2]
+
+console.log(result1 < result2 ? result1 : result2)

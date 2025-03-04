@@ -7,23 +7,8 @@ const [s1, e1] = input[n + 1].split(' ').map(Number);
 const [s2, e2] = input[n + 2].split(' ').map(Number);
 
 // Please write your code here.
-const Solution = () => {
-    let arr = [...blocks]
-    let tmp = []
-    for(let i = 0; i<arr.length; i++) {
-        if(s1 - 1 <= i && i <= e1 - 1) continue
-        tmp.push(arr[i])
-    }
-    arr = [...tmp]
-    tmp = []
-    for(let i = 0; i<arr.length; i++) {
-        if(s2 - 1 <= i && i <= e2 - 1) continue
-        tmp.push(arr[i])
-    }
-    return tmp
-}
+blocks.splice(s1-1, e1 - s1 + 1)
+blocks.splice(s2-1, e2 - s2 + 1)
 
-const answer = Solution()
-console.log(answer.length)
-for(let i = 0; i<answer.length; i++)
-    console.log(answer[i])
+console.log(blocks.length)
+blocks.forEach(v => console.log(v))

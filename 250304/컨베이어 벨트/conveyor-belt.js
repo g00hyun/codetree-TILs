@@ -8,15 +8,8 @@ const d = input[2].trim().split(' ').map(Number);
 
 const Solution = (t) => {
     while(t--) {
-        const utmp = u[n-1]
-        const dtmp = d[n-1]
-
-        for(let i = n-1; i>0; i--) {
-            u[i] = u[i-1]
-            d[i] = d[i-1]
-        }
-
-        u[0] = dtmp, d[0] = utmp
+        u.unshift(d.pop())
+        d.unshift(u.pop())
     }
 }
 

@@ -13,7 +13,7 @@ const CanGo = (i) => {
 }
 
 let i = 0;
-while(CanGo(i)) {
+while(grid.length > 1 && CanGo(i)) {
     i++;
 }
 

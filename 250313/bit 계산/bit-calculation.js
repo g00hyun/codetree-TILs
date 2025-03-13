@@ -6,6 +6,23 @@ class Set {
     add(x) {
         this.s = this.s + 1 << x;
     }
+
+    del(x) {
+        this.s = this.s - 1 << x;
+    }
+
+    print(x) {
+        return this.s >> x & 1
+    }
+
+    toggle(x) {
+        this.s = this.s ^ 1 << x;
+
+    }
+
+    clear() {
+        this.s = 0;
+    }
 }
 
 const fs = require("fs");
@@ -22,6 +39,6 @@ for (let i = 0; i < q; i++) {
 
 const customSet = new Set();
 
-customSet.add(30)
+customSet.add(5)
 
 console.log(customSet.s)

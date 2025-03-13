@@ -4,19 +4,20 @@ class Set {
     }
 
     add(x) {
-        this.s = this.s + 1 << x;
+        this.s = this.s + (1 << x);
     }
 
     del(x) {
-        this.s = this.s - 1 << x;
+        if((this.s >> x) & 1)
+            this.s = this.s ^ (1 << x);
     }
 
     print(x) {
-        return this.s >> x & 1
+        console.log((this.s >> x) & 1)
     }
 
     toggle(x) {
-        this.s = this.s ^ 1 << x;
+        this.s = this.s ^ (1 << x);
 
     }
 
@@ -24,6 +25,7 @@ class Set {
         this.s = 0;
     }
 }
+const S = new Set();
 
 const fs = require("fs");
 const input = fs.readFileSync(0).toString().trim().split('\n');
@@ -35,10 +37,9 @@ for (let i = 0; i < q; i++) {
     const x = num !== undefined ? Number(num) : undefined;
     
     // Please Write your code here.
+    if(command === 'add') S.add(x)
+    else if(command === 'delete') S.del(x)
+    else if(command === 'print') S.print(x)
+    else if(command === 'toggle') S.toggle(x)
+    else S.clear()
 }
-
-const customSet = new Set();
-
-customSet.add(5)
-
-console.log(customSet.s)

@@ -8,8 +8,7 @@ class Set {
     }
 
     del(x) {
-        if((this.s >> x) & 1)
-            this.s = this.s ^ (1 << x);
+        this.s = this.s - (1 << x);
     }
 
     print(x) {

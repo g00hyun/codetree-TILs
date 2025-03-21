@@ -23,6 +23,10 @@ const BFS = () => {
     while(q.length > 0) {
         const [x,y,bricks] = q.shift();
 
+        if(x === r2-1 && y === c2-1){
+            return time[x][y];
+        }
+
         for(let i = 0; i<4; i++) {
             const nx = x + dx[i], ny = y + dy[i];
 
@@ -45,6 +49,7 @@ const BFS = () => {
 q.push([r1-1, c1-1, k, 0])
 visited[r1-1][c1-1][k] = true;
 time[r1-1][c1-1] = 0;
-BFS();
 
-console.log(time[r2-1][c2-1])
+const answer = BFS();
+
+console.log(answer ? answer : -1)

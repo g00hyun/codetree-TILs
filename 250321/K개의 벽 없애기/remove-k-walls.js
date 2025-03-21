@@ -47,4 +47,4 @@ visited[r1-1][c1-1][k] = true;
 time[r1-1][c1-1] = 0;
 BFS();
 
-console.log(time)
+console.log(time[r2-1][c2-1])

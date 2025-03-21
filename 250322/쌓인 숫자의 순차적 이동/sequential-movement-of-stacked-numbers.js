@@ -24,11 +24,15 @@ const findMoveNode = (x,y) => {
         }
     }
 
+    if(maxval === -1)
+        return [-1,-1]
+
     const nx = x + dx[index], ny = y + dy[index];
     return [nx,ny];
 }
 
 const Move = (x,y,nx,ny,val) => {
+    // console.log(`move ${x},${y} to ${nx},${ny}`)
     const index = grid[x][y].indexOf(val);
     const sliceArr = grid[x][y].slice(index);
 
@@ -47,12 +51,17 @@ moveNums.forEach(v => {
         for(let j = 0; j<n; j++)
             if(firstmove && grid[i][j].includes(v)) {
                 const [nx,ny] = findMoveNode(i,j);
-                Move(i,j,nx,ny,v);
+                if(!(nx === -1 && ny === -1))
+                    Move(i,j,nx,ny,v);
                 firstmove = false;
             }
+    // console.log(grid)
 })
 
-grid.forEach(v => {
+
+grid.forEach(list => list.forEach(v => {
     if(v.length === 0)
         console.log('None')
-})
+    else
+        console.log(v.reverse().join(' '))
+}))

@@ -8,11 +8,12 @@ const [r2, c2] = input[2 + n].split(' ').map(Number);
 
 // Please Write your code here.
 const q = [];
-const time = Array(n).fill().map(v => Array(n).fill(-1));
+const visited = Array(n).fill().map(v => Array(n).fill().map(v => Array(k+1).fill(false)));
+const time = Array(n).fill().map(v => Array(n).fill(-1))
 
-const CanGo = (x,y) => {
+const CanGo = (x,y,bricks) => {
     if(!(0<=x && x<n && 0<=y && y<n)) return false;
-    if(time[x][y] > 0) return false;
+    if(visited[x][y][bricks]) return false;
     return true; 
 }
 
@@ -25,22 +26,25 @@ const BFS = () => {
         for(let i = 0; i<4; i++) {
             const nx = x + dx[i], ny = y + dy[i];
 
-            if(CanGo(nx,ny)) {
+            if(CanGo(nx,ny,bricks)) {
                 if(grid[nx][ny] === 1 && bricks > 0) {
                     q.push([nx,ny,bricks - 1]);
-                    time[nx][ny] = time[x][y] + 1;
+                    visited[nx][ny][bricks] = true;
+                    time[nx][ny] = Math.max(time[nx][ny], time[x][y] + 1)
                 }
                 else if (grid[nx][ny] === 0) {
                     q.push([nx,ny,bricks]);
-                    time[nx][ny] = time[x][y] + 1;
+                    visited[nx][ny][bricks] = true;
+                    time[nx][ny] = Math.max(time[nx][ny], time[x][y] + 1)
                 }
             }
         }
     }
 }
 
-q.push([r1-1, c1-1, k])
+q.push([r1-1, c1-1, k, 0])
+visited[r1-1][c1-1][k] = true;
 time[r1-1][c1-1] = 0;
 BFS();
 
-console.log(time[r2-1][c2-1])
+console.log(time)

@@ -13,7 +13,6 @@ let answer = Number.MAX_SAFE_INTEGER;
 
 const Backtracking = (row) => {
     if(q.length === n) {
-        // console.log(q)
         answer = Math.min(answer, q.reduce((a,b) => a+b));
         return;
     }

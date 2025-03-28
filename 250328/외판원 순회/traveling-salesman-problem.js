@@ -13,6 +13,7 @@ let answer = Number.MAX_SAFE_INTEGER;
 
 const Backtracking = (row) => {
     if(q.length === n) {
+        // console.log(q)
         answer = Math.min(answer, q.reduce((a,b) => a+b));
         return;
     }
@@ -20,7 +21,7 @@ const Backtracking = (row) => {
     if(rowVisited[row]) return;
 
     for(let i = 0; i<n; i++) {
-        if(colVisited[i]) continue;
+        if(colVisited[i] || cost[row][i] === 0) continue;
 
         rowVisited[row] = true;
         colVisited[i] = true;

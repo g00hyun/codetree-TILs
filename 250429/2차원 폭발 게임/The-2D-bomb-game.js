@@ -26,7 +26,6 @@ const Numbers2dFromNextArr = () => {
 }
 
 const Eliminate = () => {
-
     for(let j = 0; j<n; j++) {
         InitInterval();
 
@@ -77,29 +76,56 @@ const ForwardRotation90 = () => {
     Numbers2dFromNextArr();
 }
 
-const Solution = (k) => {
-    // 5. k번 동안 1~4 반복
-    while(k--) {
+const LoopEliminate = () => {
+    while(1) {
         // 1. M개 이상 연결된 경우 폭파
         Eliminate();
 
         // 2. 중력 적용
         Gravitiy();
 
+        // 터지고 남은 갯수
+        const curr = numbers2d.map(CountArrByEliminateZeroValue).reduce((a,b) => a+b);
+
+        // 1. M개 이상 연결된 경우 폭파
+        Eliminate();
+
+        // 2. 중력 적용
+        Gravitiy();
+
+        // 한번 더 터지고 남은 갯수
+        const next = numbers2d.map(CountArrByEliminateZeroValue).reduce((a,b) => a+b);
+
+        if(curr === next) break;
+    }
+}
+
+const ZeroFilter = (v) => v !== 0;
+const CountArrByEliminateZeroValue = (v) => v.filter(ZeroFilter).length;
+
+const Solution = (k) => {
+    // 5. k번 동안 1~4 반복
+    while(k--) {
+        LoopEliminate();
+
+        // console.log(`###[Start]#######`)
+        // numbers2d.forEach(v => console.log(v.join(' ')))
+        // console.log();
+
         // 3. 시계방향 90 회전
         ForwardRotation90();
 
         // 4. 중력 적용
         Gravitiy();
+        // numbers2d.forEach(v => console.log(v.join(' ')))
+        // console.log(`###[End]#######`)
+        // console.log()
     }
 
     // 6. 회전 이후에도 터질게 남아있다면 마지막으로 터트리기
-    Eliminate();
+    LoopEliminate();
 
     // 7. 남은 갯수 출력
-    const ZeroFilter = (v) => v !== 0;
-    const CountArrByEliminateZeroValue = (v) => v.filter(ZeroFilter).length;
-
     console.log(numbers2d.map(CountArrByEliminateZeroValue).reduce((a,b) => a+b))
 }
 

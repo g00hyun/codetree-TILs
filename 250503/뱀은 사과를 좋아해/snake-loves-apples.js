@@ -10,10 +10,6 @@ const FillApple = () => {
     positions.forEach(([x,y]) => map[x-1][y-1] = 9);
 }
 
-const InitSnake = () => {
-    map[0][0] = 1;
-}
-
 const dx = [0,0,-1,1], dy = [-1,1,0,0];
 const convert = {
     'L': 0,
@@ -26,11 +22,11 @@ const InRange = (x,y) => 0<=x && x<n && 0<=y && y<n;
 
 const Solution = () => {
     FillApple();
-    InitSnake();
     let x = 0, y = 0;
     const q = [];
     let time = 0;
 
+    map[x][y] = 1;
     q.push([x,y]);
 
     for(let i = 0; i<movements.length; i++) {
@@ -38,28 +34,43 @@ const Solution = () => {
 
         const d = convert[dir];
         while(left--) {
-            time++;
-            const nx = x + dx[d], ny = y + dy[d];
-            if(!InRange(nx,ny)) {
-                return time;
+            x += dx[d], y += dy[d];
+            // 격자를 벗어나면 종료
+            if(!InRange(x,y)) {
+                return time + 1;
             }
             
-            if(map[nx][ny] === 1) {
-                return time;
+            // 자기 몸을 물면 종료
+            // but, 꼬리와 맞물리면 꼬리는 사라지기에 괜찮
+            const [xx,yy] = q[0];
+            if(map[x][y] === 1 && !(xx === x && yy === y)) {
+                return time + 1;
             }
 
-            if(map[nx][ny] === 0) {
-                const [a,b] = q.pop();
-                map[a][b] = 0;
+            // 사과를 못먹었을 경우, 마지막 꼬리 삭제
+            if(map[x][y] === 9) {
+                map[x][y] = 1;
+                q.push([x,y]);
+                time++;
             }
-            x = nx, y = ny;
-            map[x][y] = 1;
-            q.push([x,y]);
+            else {
+                const [a,b] = q.shift();
+                map[a][b] = 0;
+                // console.log(`Erase Coord => (${a}, ${b})`)
+
+                map[x][y] = 1;
+                q.push([x,y]);
+                time++;
+            }
+
+            // console.log(`(x,y) => (${x},${y})`);
         }
     }
+
 
     return time;
 }
 
 const answer = Solution()
 console.log(answer)
+// map.forEach(v => console.log(v.join(' ')))

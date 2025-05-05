@@ -102,8 +102,8 @@ const Solution = () => {
         UpdateGrid();
     }
 
-    const countMarbles = grid.map(v => v.filter(v => !!v).length).reduce((a,b) => a+b);
-    const maxWeight = grid.map(v => v.filter(v => !!v).map(v => v[1])).map(v => {
+    const countMarbles = grid.map(v => v.filter(v => v).length).reduce((a,b) => a+b);
+    const maxWeight = grid.map(v => v.filter(v => v).map(v => v[1])).map(v => {
         const len = v.length;
         if(len === 0)
             return 0;

@@ -9,40 +9,29 @@ const dx = [0,0,1,-1], dy = [1,-1,0,0];
 
 const InRange = (x,y) => 0<=x && x<n && 0<=y && y<n;
 
-const BFS = (visited) => {
+const BFS = (x,y,len) => {
+    if(memo[x][y])
+        return memo[x][y];
+        
     let result = 0;
-    while(q.length > 0) {
-        const [x,y,len] = q.shift();
-        result = Math.max(result, len);
 
-        for(let i = 0; i<4; i++) {
-            const nx = x + dx[i], ny = y + dy[i];
-            if(InRange(nx,ny) && !visited[nx][ny] && grid[x][y] < grid[nx][ny]) {
-                q.push([nx,ny,len+1]);
-                visited[nx][ny] = true;
-            }
+    for(let i = 0; i<4; i++) {
+        const nx = x + dx[i], ny = y + dy[i];
+        if(InRange(nx,ny) && grid[x][y] < grid[nx][ny]) {
+            result = Math.max(result, len + BFS(nx,ny,len));
         }
     }
+
+    memo[x][y] = result;
     return result;
 }
 
-const q = [];
+const memo = Array(n).fill().map(v => Array(n).fill(0));
 const Solution = () => {
-    let answer = -1;
-    for(let i = 0; i<n; i++) {
-        for(let j = 0; j<n; j++) {
-            q.splice(0);
-            const visited = Array(n).fill().map(v => Array(n).fill(false));
-            q.push([i,j,1]);
-            visited[i][j] = true;
-
-            const lis = BFS(visited);
-            answer = Math.max(answer, lis);
-        }
-    }
-
-    return answer;
+    for(let i = 0; i<n; i++)
+        for(let j = 0; j<n; j++)
+            BFS(i,j,1);
 }
 
-const answer = Solution();
-console.log(answer);
+Solution();
+console.log(memo.map(v => v.reduce((a,b) => Math.max(a,b))).reduce((a,b) => Math.max(a,b)) + 1)

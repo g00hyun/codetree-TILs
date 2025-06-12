@@ -8,10 +8,13 @@ const MAX_INT = Number.MAX_SAFE_INTEGER
 const dp = Array(m+1).fill(MAX_INT)
 
 dp[0] = 0
-for(let i = 0; i<n; i++)
-    for(let j = m; j>0; j--)
+for(let i = 0; i<n; i++) {
+    for(let j = m; j>0; j--) {
         if(j >= arr[i] && dp[j - arr[i]] !== MAX_INT)
-            dp[j] = dp[j - arr[i]]+1
+            dp[j] = Math.min(dp[j], dp[j - arr[i]] + 1)
+    }
+    // console.log(dp)
+}
 
 const answer = dp[m]
 console.log(answer === MAX_INT ? -1 : answer)

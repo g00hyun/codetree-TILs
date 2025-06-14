@@ -24,7 +24,7 @@ function Backtracking(x,y,cnt) {
 
     const dir = moveDir[x][y];
 
-    for(let i = 0; i<n; i++) {
+    for(let i = 1; i<n; i++) {
         const nx = x + dx[dir]*i, ny = y + dy[dir]*i;
         if(CanGo(nx,ny,num[x][y]))
             Backtracking(nx,ny,cnt+1);

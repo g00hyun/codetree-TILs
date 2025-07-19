@@ -10,34 +10,23 @@ public class Main {
             blocks[i] = sc.nextInt();
         }
         // Please write your code here.
-        int result = 0;
-        while(!isFinish(blocks)) {
-            step(blocks);
-            result++;
-        }
-
-        System.out.println(result);
+        int avg = calAvg(blocks);
+        
+        int allMoveCnt = 0;
+        for(int i : blocks)
+            allMoveCnt += diff(avg, i);
+        
+        System.out.println(allMoveCnt/2);
     }
 
-    static boolean isFinish(int[] blocks) {
-        int target = blocks[0];        
-        for (int i = 1; i<blocks.length; i++) 
-            if(target != blocks[i])
-                return false;
-        return true;
+    static int calAvg(int[] blocks) {
+        int sum = 0;
+        for(int i : blocks)
+            sum += i;
+        return sum / blocks.length;
     }
 
-    static void step(int[] blocks) {
-        int maxIdx = 0, minIdx = 0;
-
-        for(int i = 1; i<blocks.length; i++) {
-            if(blocks[maxIdx] < blocks[i])
-                maxIdx = i;
-            if(blocks[minIdx] > blocks[i])
-                minIdx = i;
-        }
-
-        blocks[maxIdx]--;
-        blocks[minIdx]++;
+    static int diff(int a, int b) {
+        return a > b ? a - b : b - a;
     }
 }

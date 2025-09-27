@@ -73,9 +73,7 @@ class Square {
     }
 
     boolean overlapBy(Square other) {
-        if(this.ex > other.sx && this.ey > other.sy) return true;
-
-        return false;
+        return this.ex > other.sx && this.ey > other.sy;
     }
 
     int getAreaValues(int[][] map) {

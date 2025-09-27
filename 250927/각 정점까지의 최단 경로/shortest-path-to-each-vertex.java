@@ -6,6 +6,7 @@ public class Main {
     static int startIdx;
     static List<Pair>[] map;
     static int[] dist;
+    static boolean[] visited;
 
     static PriorityQueue<Pair> pq = new PriorityQueue<>((a,b) -> a.weight-b.weight);
     
@@ -19,6 +20,7 @@ public class Main {
 
         map = new ArrayList[n+1];
         dist = new int[n+1];
+        visited = new boolean[n+1];
         for(int i = 0; i<=n; i++)
             map[i] = new ArrayList<>();
         for(int i = 0; i<m; i++) {
@@ -31,6 +33,7 @@ public class Main {
 
         pq.add(new Pair(startIdx, 0));
         dist[startIdx] = 0;
+        visited[startIdx] = true;
         while(!pq.isEmpty()) {
             Pair p = pq.poll();
             int minIdx = p.to;
@@ -41,7 +44,8 @@ public class Main {
                 int targetVal = map[minIdx].get(i).weight;
 
                 int newDist = dist[minIdx] + targetVal;
-                if(dist[targetIdx] > newDist) {
+                if(!visited[targetIdx] && dist[targetIdx] > newDist) {
+                    visited[targetIdx] = true;
                     dist[targetIdx] = newDist;
                     pq.add(new Pair(targetIdx, newDist));
                 }

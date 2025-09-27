@@ -14,7 +14,7 @@ public class Main {
         int[] line = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         n = line[0]; m = line[1];
 
-        map = new int[n][n];
+        map = new int[n][m];
         for(int i = 0; i<n; i++)
             map[i] = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
 
@@ -25,9 +25,9 @@ public class Main {
 
     private static void getFirstSquare() {
         for(int sx = 0; sx < n; sx++)
-            for(int sy = 0; sy < n; sy++)
+            for(int sy = 0; sy < m; sy++)
                 for(int ex = sx+1; ex < n+1; ex++)
-                    for(int ey = sy+1; ey < n+1; ey++) {
+                    for(int ey = sy+1; ey < m+1; ey++) {
                         first = new Square(sx,sy,ex,ey);
                         getSecondSquare();
                     }
@@ -35,9 +35,9 @@ public class Main {
 
     private static void getSecondSquare() {
         for(int sx = 0; sx < n; sx++)
-            for(int sy = 0; sy < n; sy++)
+            for(int sy = 0; sy < m; sy++)
                 for(int ex = sx+1; ex < n+1; ex++)
-                    for(int ey = sy+1; ey < n+1; ey++) {
+                    for(int ey = sy+1; ey < m+1; ey++) {
                         second = new Square(sx,sy,ex,ey);
                         if(canCalc()) maxSum = Math.max(maxSum, calc());
                     }
@@ -74,7 +74,6 @@ class Square {
 
     boolean overlapBy(Square other) {
         if(this.ex > other.sx && this.ey > other.sy) return true;
-        // if(this.sx < other.ex && this.sy < other.ey) return true;
 
         return false;
     }

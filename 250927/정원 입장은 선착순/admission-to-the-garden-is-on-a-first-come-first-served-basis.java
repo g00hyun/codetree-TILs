@@ -29,30 +29,26 @@ public class Main {
 // 넘어가는 시점 : time보다 작으면 넘어가면 됌
     private static void simulation() {
         // 처음 시작하는 시간으로 시간 설정
-        time = Arrays.stream(person).filter(v -> !v.visited).map(v -> v.arrivalTime).reduce((a,b) -> Math.min(a, b)).get();
+        // time = Arrays.stream(person).filter(v -> !v.visited).map(v -> v.arrivalTime).reduce((a,b) -> Math.min(a, b)).get();
         // 시간에 맞는 사람 pq에 삽입
-        while(!pq.isEmpty()) {
-            Person p = pq.peek();
-            if(p.arrivalTime <= time) {
-                waiting.add(pq.poll());
-                continue;
+        while(!pq.isEmpty() || !waiting.isEmpty()) {
+            if(!pq.isEmpty()) {
+                Person p = pq.peek();
+                if(p.arrivalTime <= time) {
+                    waiting.add(pq.poll());
+                    continue;
+                }
+                if(waiting.isEmpty()) {
+                    time = p.arrivalTime;
+                }
             }
 
-            if(waiting.isEmpty()) {
-                time = p.arrivalTime;
-            }
-
-            while(!waiting.isEmpty()) {
+            if(!waiting.isEmpty()) {
                 Person enter = waiting.poll();
+                // print("[Enter Person] #" + enter.num + " in time " + time + "\n");
                 enter.enterTime = time;
                 time += enter.spendTime;
             }
-        }
-
-        while(!waiting.isEmpty()) {
-            Person enter = waiting.poll();
-            enter.enterTime = time;
-            time += enter.spendTime;
         }
 
         int result = Arrays.stream(person).map(v -> v.enterTime - v.arrivalTime).reduce(Math::max).get();
